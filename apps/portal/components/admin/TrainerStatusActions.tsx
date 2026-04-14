@@ -29,9 +29,12 @@ export default function TrainerStatusActions({
     const { data: { session } } = await supabase.auth.getSession();
     const token = session?.access_token;
     
+    // ✅ Use the Railway API URL
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://formed-platform-production.up.railway.app";
+    
     try {
       // Call your backend API instead of direct Supabase
-      const response = await fetch(`/api/trainers/${trainerId}`, {
+      const response = await fetch(`${API_URL}/api/trainers/${trainerId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

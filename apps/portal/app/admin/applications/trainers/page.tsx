@@ -6,7 +6,7 @@ import Badge from "@/components/portal/ui/Badge";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
-
+export const dynamic = 'force-dynamic';
 const STATUS_FILTERS = [
   "all", "submitted", "under_review", "interview_requested",
   "approved_pending_docs", "approved_pending_training", "active", "restricted", "rejected"
@@ -14,12 +14,16 @@ const STATUS_FILTERS = [
 
 export default async function TrainerApplicationsPage({
   searchParams
-}: { searchParams: { status?: string } }) {
+}: { 
+  searchParams: Promise<{ status?: string }>  // ← Make it a Promise
+}) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/auth/login");
 
-  const status = searchParams.status ?? "submitted";
+  // ✅ Await the searchParams
+  const params = await searchParams;
+  const status = params.status ?? "submitted";
 
   let query = supabase
     .from("trainers")
