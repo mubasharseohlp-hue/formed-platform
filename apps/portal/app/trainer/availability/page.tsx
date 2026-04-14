@@ -49,12 +49,20 @@ export default function AvailabilityPage() {
   }, []);
 
   const toggle = (day: number, block: string) => {
-    setAvailability(prev => {
-      const next = { ...prev, [day]: new Set(prev[day]) };
-      next[day].has(block) ? next[day].delete(block) : next[day].add(block);
-      return next;
-    });
-  };
+  setAvailability(prev => {
+    // Ensure prev[day] exists and is a Set
+    const currentSet = prev[day] || new Set<string>();
+    const nextSet = new Set(currentSet);
+    
+    if (nextSet.has(block)) {
+      nextSet.delete(block);
+    } else {
+      nextSet.add(block);
+    }
+    
+    return { ...prev, [day]: nextSet };
+  });
+};
 
   const handleSave = async () => {
     if (!trainerId) return;
