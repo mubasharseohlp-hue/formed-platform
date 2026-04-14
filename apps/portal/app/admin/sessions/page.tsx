@@ -7,6 +7,9 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { formatDate, formatTime } from "@/lib/utils";
 
+// Force dynamic to prevent caching
+export const dynamic = 'force-dynamic';
+
 export default async function AdminSessionsPage({
   searchParams
 }: { searchParams: Promise<{ status?: string }> }) {
@@ -22,15 +25,24 @@ export default async function AdminSessionsPage({
     "payment_pending", "paid", "completed", "cancelled", "no_show"
   ];
 
+  // Query with proper relations
   let query = supabase
     .from("sessions")
     .select(`
-      id, date_time, booking_status, session_type,
-      notes_submitted, payout_status,
+      id, 
+      date_time, 
+      booking_status, 
+      session_type,
+      notes_submitted, 
+      payout_status,
       client_id,
       trainer_id,
-      clients:client_id (full_name),
-      trainers:trainer_id (full_name)
+      client:clients!client_id (
+        full_name
+      ),
+      trainer:trainers!trainer_id (
+        full_name
+      )
     `)
     .order("date_time", { ascending: false })
     .limit(50);
@@ -39,17 +51,24 @@ export default async function AdminSessionsPage({
 
   const { data: sessions } = await query;
 
+  // Debug: Log the structure of the first session
+  if (sessions && sessions.length > 0) {
+    console.log("Session structure:", JSON.stringify(sessions[0], null, 2));
+  }
+
   return (
     <div className="p-6 lg:p-8 max-w-6xl mx-auto space-y-6">
       <SectionHeader title="Session Management" />
 
       <div className="flex gap-1 flex-wrap border-b border-stone pb-0 overflow-x-auto">
         {["all", ...FILTERS].map(s => (
-          <Link key={s}
+          <Link
+            key={s}
             href={`/admin/sessions?status=${s}`}
             className={`px-3 py-2 text-[10px] tracking-widest uppercase font-body transition-colors border-b-2 -mb-px whitespace-nowrap ${
               status === s ? "border-ink text-ink" : "border-transparent text-muted hover:text-ink"
-            }`}>
+            }`}
+          >
             {s.replace(/_/g, " ")}
           </Link>
         ))}
@@ -57,8 +76,9 @@ export default async function AdminSessionsPage({
 
       <div className="space-y-2">
         {sessions?.map((s) => {
-          const clientName = s.clients?.[0]?.full_name || "Unknown Client";
-const trainerName = s.trainers?.[0]?.full_name || "Unknown Trainer";
+          // ✅ Access array elements with [0]
+          const clientName = s.client?.[0]?.full_name || "Unknown Client";
+          const trainerName = s.trainer?.[0]?.full_name || "Unknown Trainer";
           
           return (
             <Link key={s.id} href={`/admin/sessions/${s.id}`}>
