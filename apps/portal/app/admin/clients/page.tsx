@@ -52,7 +52,7 @@ export default async function AdminClientsPage() {
                       {c.monthly_rate ? formatCurrency(c.monthly_rate) + "/mo" : ""}
                     </p>
                     <p className="text-muted text-xs font-body">
-                      Trainer: {c.trainers?.full_name ?? "Unassigned"}
+                      Trainer: {c.trainers?.[0]?.full_name ?? "Unassigned"}
                     </p>
                   </div>
                 </div>
