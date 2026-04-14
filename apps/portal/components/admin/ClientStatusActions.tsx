@@ -28,9 +28,12 @@ export default function ClientStatusActions({
     const { data: { session } } = await supabase.auth.getSession();
     const token = session?.access_token;
     
+    // ✅ FIX: Use the Railway API URL
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://formed-platform-production.up.railway.app";
+    
     try {
       // Call your backend API instead of direct Supabase
-      const response = await fetch(`/api/clients/${clientId}`, {
+      const response = await fetch(`${API_URL}/api/clients/${clientId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
