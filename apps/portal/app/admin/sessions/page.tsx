@@ -24,7 +24,6 @@ export default async function AdminSessionsPage({
     "payment_pending", "paid", "completed", "cancelled", "no_show"
   ];
 
-  // Query with proper relations
   let query = supabase
     .from("sessions")
     .select(`
@@ -48,54 +47,10 @@ export default async function AdminSessionsPage({
 
   if (status !== "all") query = query.eq("booking_status", status);
 
-  const { data: sessions, error: queryError } = await query;
-
-  // Prepare debug information - FIXED VERSION
-  const debugInfo: any = {
-    status,
-    hasError: !!queryError,
-    errorMessage: queryError?.message,
-    sessionsCount: sessions?.length || 0,
-    firstSessionRaw: sessions && sessions.length > 0 ? sessions[0] : null,
-    sessionIds: sessions?.map(s => s.id).slice(0, 5),
-  };
-
-  // Separate query to check if sessions exist at all - FIXED
-  try {
-    const { count, error: countError } = await supabase
-      .from("sessions")
-      .select("*", { count: "exact", head: true });
-    
-    debugInfo.totalSessionsCount = count;
-    debugInfo.countError = countError?.message;
-  } catch (err: any) {
-    debugInfo.countError = err.message;
-  }
-
-  // Also check if there are any sessions with the current status
-  try {
-    const { count: statusCount } = await supabase
-      .from("sessions")
-      .select("*", { count: "exact", head: true })
-      .eq("booking_status", status !== "all" ? status : "requested");
-    
-    debugInfo.statusSessionsCount = statusCount;
-  } catch (err: any) {
-    debugInfo.statusCountError = err.message;
-  }
+  const { data: sessions } = await query;
 
   return (
     <div className="p-6 lg:p-8 max-w-6xl mx-auto space-y-6">
-      {/* VISIBLE DEBUG SECTION */}
-      <div className="bg-yellow-50 border-2 border-yellow-400 p-4 rounded-md mb-4">
-        <details open>
-          <summary className="font-bold cursor-pointer">🔍 DEBUG INFO (Click to collapse)</summary>
-          <pre className="text-xs mt-2 overflow-auto max-h-96 whitespace-pre-wrap bg-white p-2 rounded border">
-            {JSON.stringify(debugInfo, null, 2)}
-          </pre>
-        </details>
-      </div>
-
       <SectionHeader title="Session Management" />
 
       <div className="flex gap-1 flex-wrap border-b border-stone pb-0 overflow-x-auto">
@@ -115,25 +70,8 @@ export default async function AdminSessionsPage({
       <div className="space-y-2">
         {sessions && sessions.length > 0 ? (
           sessions.map((s: any) => {
-            // Extract names safely
-            let clientName = "Unknown Client";
-            let trainerName = "Unknown Trainer";
-            
-            if (s.client) {
-              if (Array.isArray(s.client) && s.client.length > 0) {
-                clientName = s.client[0]?.full_name || "Unknown Client";
-              } else if (s.client.full_name) {
-                clientName = s.client.full_name;
-              }
-            }
-            
-            if (s.trainer) {
-              if (Array.isArray(s.trainer) && s.trainer.length > 0) {
-                trainerName = s.trainer[0]?.full_name || "Unknown Trainer";
-              } else if (s.trainer.full_name) {
-                trainerName = s.trainer.full_name;
-              }
-            }
+            const clientName = s.client?.[0]?.full_name || "Unknown Client";
+            const trainerName = s.trainer?.[0]?.full_name || "Unknown Trainer";
             
             return (
               <Link key={s.id} href={`/admin/sessions/${s.id}`}>
@@ -154,9 +92,6 @@ export default async function AdminSessionsPage({
                         </p>
                         <p className="text-muted text-xs font-body">
                           {formatTime(s.date_time)} · {s.session_type?.replace(/_/g, " ")}
-                        </p>
-                        <p className="text-[9px] text-muted font-mono">
-                          Client ID: {s.client_id?.slice(0, 8)}... | Trainer ID: {s.trainer_id?.slice(0, 8)}...
                         </p>
                       </div>
                     </div>
