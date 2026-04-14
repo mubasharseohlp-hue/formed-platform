@@ -9,6 +9,21 @@ import { formatDate, formatTime } from "@/lib/utils";
 
 // Force dynamic to prevent caching
 export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+
+// Define a type for the session data
+type SessionWithRelations = {
+  id: string;
+  date_time: string;
+  booking_status: string;
+  session_type: string;
+  notes_submitted: boolean;
+  payout_status: string;
+  client_id: string;
+  trainer_id: string;
+  client: { full_name: string }[] | null;
+  trainer: { full_name: string }[] | null;
+};
 
 export default async function AdminSessionsPage({
   searchParams
@@ -49,15 +64,35 @@ export default async function AdminSessionsPage({
 
   if (status !== "all") query = query.eq("booking_status", status);
 
-  const { data: sessions } = await query;
+  const { data: sessions } = await query as { data: SessionWithRelations[] | null };
 
-  // Debug: Log the structure of the first session
+  // Debug logging
   if (sessions && sessions.length > 0) {
-    console.log("Session structure:", JSON.stringify(sessions[0], null, 2));
+    console.log("=== SESSIONS DATA ===");
+    console.log("First session:", JSON.stringify(sessions[0], null, 2));
   }
 
   return (
     <div className="p-6 lg:p-8 max-w-6xl mx-auto space-y-6">
+      {/* Debug Info Box */}
+      <div className="bg-gray-100 border border-gray-300 p-3 rounded-md text-xs">
+        <details>
+          <summary className="cursor-pointer font-bold">Debug Info</summary>
+          <pre className="mt-2 overflow-auto max-h-60">
+            {JSON.stringify({
+              status,
+              sessionsCount: sessions?.length || 0,
+              sampleData: sessions?.[0] ? {
+                client_id: sessions[0].client_id,
+                trainer_id: sessions[0].trainer_id,
+                client: sessions[0].client,
+                trainer: sessions[0].trainer,
+              } : null,
+            }, null, 2)}
+          </pre>
+        </details>
+      </div>
+
       <SectionHeader title="Session Management" />
 
       <div className="flex gap-1 flex-wrap border-b border-stone pb-0 overflow-x-auto">
@@ -76,7 +111,7 @@ export default async function AdminSessionsPage({
 
       <div className="space-y-2">
         {sessions?.map((s) => {
-          // ✅ Access array elements with [0]
+          // Safe access with type checking
           const clientName = s.client?.[0]?.full_name || "Unknown Client";
           const trainerName = s.trainer?.[0]?.full_name || "Unknown Trainer";
           
@@ -99,6 +134,9 @@ export default async function AdminSessionsPage({
                       </p>
                       <p className="text-muted text-xs font-body">
                         {formatTime(s.date_time)} · {s.session_type?.replace(/_/g, " ")}
+                      </p>
+                      <p className="text-[9px] text-muted font-mono">
+                        IDs: {s.client_id?.slice(0, 8)}... → {s.trainer_id?.slice(0, 8)}...
                       </p>
                     </div>
                   </div>
