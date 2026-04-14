@@ -74,7 +74,27 @@ export default async function AdminSessionsPage({
 
   return (
     <div className="p-6 lg:p-8 max-w-6xl mx-auto space-y-6">
+      {/* Debug Info Box */}
+      <div className="bg-gray-100 border border-gray-300 p-3 rounded-md text-xs">
+        <details>
+          <summary className="cursor-pointer font-bold">Debug Info</summary>
+          <pre className="mt-2 overflow-auto max-h-60">
+            {JSON.stringify({
+              status,
+              sessionsCount: sessions?.length || 0,
+              sampleData: sessions?.[0] ? {
+                client_id: sessions[0].client_id,
+                trainer_id: sessions[0].trainer_id,
+                client: sessions[0].client,
+                trainer: sessions[0].trainer,
+              } : null,
+            }, null, 2)}
+          </pre>
+        </details>
+      </div>
+
       <SectionHeader title="Session Management" />
+
       <div className="flex gap-1 flex-wrap border-b border-stone pb-0 overflow-x-auto">
         {["all", ...FILTERS].map(s => (
           <Link
