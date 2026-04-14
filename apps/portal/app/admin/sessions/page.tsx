@@ -57,8 +57,8 @@ export default async function AdminSessionsPage({
 
       <div className="space-y-2">
         {sessions?.map((s) => {
-          const clientName = s.clients?.full_name || "Unknown Client";
-          const trainerName = s.trainers?.full_name || "Unknown Trainer";
+          const clientName = s.clients?.[0]?.full_name || "Unknown Client";
+const trainerName = s.trainers?.[0]?.full_name || "Unknown Trainer";
           
           return (
             <Link key={s.id} href={`/admin/sessions/${s.id}`}>
