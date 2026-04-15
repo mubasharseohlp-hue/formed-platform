@@ -67,6 +67,20 @@ export default function Navbar() {
 
             {/* Apply CTA */}
             <div className="hidden lg:block">
+              {/* Login Button */}
+              <Link
+                href="https://formed-portal.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "text-[10px] tracking-[0.25em] uppercase font-body font-medium px-6 py-3.5 transition-all duration-300",
+                  scrolled
+                    ? "text-muted hover:text-ink"
+                    : "text-cream/70 hover:text-cream"
+                )}
+              >
+                Log In
+              </Link>
               <Link
                 href="/apply"
                 className={cn(
