@@ -41,9 +41,9 @@ export default function Footer() {
               <Image
                 src="/images/logo-dark.png"
                 alt="FORMED"
-                width={360}
-                height={100}
-                className="w-auto h-12 lg:h-14 object-contain"
+                width={100}
+                height={50}
+                className=" object-contain"
               />
             </Link>
             <p className="text-warm text-sm leading-relaxed max-w-xs">

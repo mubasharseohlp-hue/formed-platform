@@ -42,7 +42,7 @@ export default function Navbar() {
                 alt="FORMED"
                 width={200}
                 height={80}
-                className="w-auto h-16 lg:h-20 object-contain"
+                className=" object-contain"
                 priority
               />
             </Link>
