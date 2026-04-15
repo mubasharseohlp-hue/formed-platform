@@ -70,7 +70,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Founder Story Section - Fixed Image */}
+        {/* Founder Story Section - Image adjusted */}
         <section className="bg-stone py-24 lg:py-36">
           <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -102,12 +102,12 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="order-1 lg:order-2">
-                <div className="relative aspect-square w-full max-w-md mx-auto lg:max-w-full">
+                <div className="relative aspect-square w-full max-w-md mx-auto lg:max-w-full overflow-hidden rounded-lg">
                   <Image
                     src="/images/rodney-headshot.png"
                     alt="Rodney Cilien, Founder of FORMED"
                     fill
-                    className="object-cover object-top rounded-lg"
+                    className="object-cover object-[50%_30%]"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
