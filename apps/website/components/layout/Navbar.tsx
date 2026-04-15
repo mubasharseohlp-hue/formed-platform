@@ -66,33 +66,36 @@ export default function Navbar() {
             </nav>
 
             {/* Apply CTA */}
-            <div className="hidden lg:block">
-              {/* Login Button */}
-              <Link
-                href="https://formed-portal.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  "text-[10px] tracking-[0.25em] uppercase font-body font-medium px-6 py-3.5 transition-all duration-300",
-                  scrolled
-                    ? "text-muted hover:text-ink"
-                    : "text-cream/70 hover:text-cream"
-                )}
-              >
-                Log In
-              </Link>
-              <Link
-                href="/apply"
-                className={cn(
-                  "text-[10px] tracking-[0.25em] uppercase font-body font-medium px-8 py-3.5 border transition-all duration-300",
-                  scrolled
-                    ? "bg-ink text-cream border-ink hover:bg-accent"
-                    : "bg-cream text-ink border-cream hover:bg-stone"
-                )}
-              >
-                Apply Now
-              </Link>
-            </div>
+            {/* Desktop Buttons */}
+<div className="hidden lg:flex items-center gap-4">
+  {/* Login Button */}
+  <Link
+    href="https://formed-portal.vercel.app"
+    target="_blank"
+    rel="noopener noreferrer"
+    className={cn(
+      "text-[10px] tracking-[0.25em] uppercase font-body font-medium px-8 py-3.5 border transition-all duration-300",
+      scrolled
+        ? "bg-ink text-cream border-ink hover:bg-accent"
+        : "bg-cream text-ink border-cream hover:bg-stone"
+    )}
+  >
+    Log In
+  </Link>
+  
+  {/* Apply CTA */}
+  <Link
+    href="/apply"
+    className={cn(
+      "text-[10px] tracking-[0.25em] uppercase font-body font-medium px-8 py-3.5 border transition-all duration-300",
+      scrolled
+        ? "bg-ink text-cream border-ink hover:bg-accent"
+        : "bg-cream text-ink border-cream hover:bg-stone"
+    )}
+  >
+    Apply Now
+  </Link>
+</div>
 
             {/* Mobile burger */}
             <button
@@ -156,14 +159,25 @@ export default function Navbar() {
             </Link>
           ))}
           <div className="mt-6">
-            <Link
-              href="/apply"
-              onClick={() => setOpen(false)}
-              className="inline-block bg-cream text-ink text-[10px] tracking-[0.25em] uppercase font-body px-10 py-4 hover:bg-stone transition-colors"
-            >
-              Apply for Membership
-            </Link>
-          </div>
+  <Link
+    href="https://formed-portal.vercel.app"
+    target="_blank"
+    rel="noopener noreferrer"
+    onClick={() => setOpen(false)}
+    className="inline-block bg-cream text-ink text-[10px] tracking-[0.25em] uppercase font-body px-10 py-4 hover:bg-stone transition-colors text-center w-full"
+  >
+    Log In
+  </Link>
+  <div className="mt-3">
+    <Link
+      href="/apply"
+      onClick={() => setOpen(false)}
+      className="inline-block bg-cream text-ink text-[10px] tracking-[0.25em] uppercase font-body px-10 py-4 hover:bg-stone transition-colors w-full text-center"
+    >
+      Apply for Membership
+    </Link>
+  </div>
+</div>
         </nav>
 
         <p className="absolute bottom-8 left-10 text-[10px] tracking-[0.25em] uppercase text-muted font-body">
