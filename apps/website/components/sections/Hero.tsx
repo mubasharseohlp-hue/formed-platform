@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative h-screen min-h-[700px] flex flex-col justify-end overflow-hidden">
+    <section className="pt-50 lg:pt-50 relative h-screen min-h-[700px] flex flex-col justify-end overflow-hidden">
       {/* Full-bleed background image */}
       <div className="absolute inset-0">
         <Image
