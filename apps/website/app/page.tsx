@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="pt-16 lg:pt-20">
         <Hero />
         <HowItWorks />
         <WhoItsFor />
