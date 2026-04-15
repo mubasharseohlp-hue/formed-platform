@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative h-screen min-h-[700px] flex flex-col justify-end overflow-hidden">
+    <section className="relative h-screen min-h-[700px] flex flex-col justify-end overflow-hidden pt-20">
       {/* Full-bleed background image */}
       <div className="absolute inset-0">
         <Image
@@ -20,7 +20,7 @@ export default function Hero() {
       </div>
 
       {/* Content pinned to bottom */}
-      <div className="relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10 pb-16 lg:pb-24 w-full">
+      <div className="relative max-w-screen-xl mx-auto px-6 lg:px-10 pt-40 lg:pt-48 pb-24 w-full">
         <div className="max-w-3xl">
           {/* Updated: Changed "Est. 2025" to "2026" and kept "Tampa Bay" */}
           <p className="text-[10px] tracking-ultra uppercase text-cream/50 mb-6 fade-up font-body">
