@@ -14,7 +14,7 @@ const links = [
 ];
 
 export default function Navbar() {
-  const [open, setOpen]     = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -25,6 +25,9 @@ export default function Navbar() {
 
   return (
     <>
+      {/* This spacer div prevents content from going under navbar */}
+      <div className="h-16 lg:h-20" />
+      
       <header className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         scrolled ? "bg-cream/95 backdrop-blur-md border-b border-stone" : "bg-transparent"
