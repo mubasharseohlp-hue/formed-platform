@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 
@@ -30,12 +31,22 @@ export default function Navbar() {
       )}>
         <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
-            <Link href="/" className={cn(
-              "font-display font-medium text-lg tracking-wide2 transition-colors duration-300",
-              scrolled ? "text-ink" : "text-cream"
-            )}>
-              FORMED
+            {/* Logo with Image */}
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/images/logo.png"
+                alt="FORMED"
+                width={32}
+                height={32}
+                className="w-auto h-8 object-contain"
+                priority
+              />
+              <span className={cn(
+                "font-display font-medium text-lg tracking-wide2 transition-colors duration-300",
+                scrolled ? "text-ink" : "text-cream"
+              )}>
+                FORMED
+              </span>
             </Link>
 
             {/* Desktop nav */}

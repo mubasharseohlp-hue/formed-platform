@@ -57,7 +57,6 @@ export default function ApplyForm() {
       const data = await res.json();
 
       if (!res.ok) {
-        // Handle duplicate email gracefully
         if (res.status === 409) {
           setErrorMsg(
             "An account with this email already exists. Please sign in at portal.formed.fit"
@@ -87,10 +86,19 @@ export default function ApplyForm() {
         <h2 className="font-display text-4xl font-light text-ink mb-4">
           Thank you.
         </h2>
-        <p className="text-muted text-sm leading-relaxed max-w-sm mx-auto font-body">
+        <p className="text-muted text-sm leading-relaxed max-w-sm mx-auto font-body mb-6">
           Our team will review your application and follow up within 24–48
           hours. Check your email for a confirmation.
         </p>
+        {/* NEW: What happens next in success state */}
+        <div className="bg-stone/30 p-4 max-w-sm mx-auto rounded-sm">
+          <p className="text-[10px] tracking-ultra uppercase text-muted mb-2 font-body">
+            What happens next
+          </p>
+          <p className="text-xs text-ink font-body">
+            We'll match you with a vetted trainer and schedule your first session.
+          </p>
+        </div>
       </div>
     );
   }

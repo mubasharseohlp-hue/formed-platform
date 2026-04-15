@@ -5,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About | FORMED",
   description: "FORMED was created for people who want to train consistently without building their lives around the gym.",
 };
 
@@ -65,6 +65,54 @@ export default function AboutPage() {
                   width={800} height={1000}
                   className="w-full h-full object-cover"
                 />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Founder Story Section */}
+        <section className="bg-stone py-24 lg:py-36">
+          <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div className="order-2 lg:order-1">
+                <p className="text-[10px] tracking-ultra uppercase text-muted mb-4 font-body">Founder Story</p>
+                <h2 className="font-display font-light text-ink text-4xl lg:text-5xl mb-6 leading-tight">
+                  Fitness should adapt to your life.
+                </h2>
+                <div className="space-y-5 text-muted text-sm leading-relaxed font-body">
+                  <p>
+                    FORMED was founded by <strong className="text-ink">Rodney Cilien, MBA, NASM-CPT</strong> with a simple vision:
+                    Make high-level personal training more accessible, more convenient, and more consistent for people with demanding schedules.
+                  </p>
+                  <p>
+                    After seeing how many individuals struggled to stay consistent with traditional gyms — commuting, waiting for equipment, 
+                    fitting workouts into overcrowded schedules — Rodney built FORMED around one core idea:
+                  </p>
+                  <p className="text-ink font-medium italic">
+                    "Fitness should adapt to your life — not the other way around."
+                  </p>
+                  <p>
+                    Today, FORMED brings premium, private fitness directly to your home. No commute. No crowds. No excuses. Just results.
+                  </p>
+                </div>
+                <div className="mt-8">
+                  {/* Fixed: Changed variant from "primary" to "dark" */}
+                  <Button href="/apply" size="lg" variant="dark">
+                    Apply to get started with FORMED today
+                  </Button>
+                </div>
+              </div>
+              <div className="order-1 lg:order-2 overflow-hidden rounded-lg">
+                <div className="aspect-square bg-ink/5 flex items-center justify-center">
+                  {/* Founder Headshot - Using your actual image */}
+                  <Image
+                    src="/images/rodney-headshot.png"
+                    alt="Rodney Cilien, Founder of FORMED"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+                </div>
               </div>
             </div>
           </div>

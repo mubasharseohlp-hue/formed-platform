@@ -22,35 +22,38 @@ export default function Hero() {
       {/* Content pinned to bottom */}
       <div className="relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10 pb-16 lg:pb-24 w-full">
         <div className="max-w-3xl">
+          {/* Updated: Changed "Est. 2025" to "2026" and kept "Tampa Bay" */}
           <p className="text-[10px] tracking-ultra uppercase text-cream/50 mb-6 fade-up font-body">
-            Tampa Bay · Private Training · Est. 2025
+            Tampa Bay · Private Training · 2026
           </p>
+          {/* Updated: New headline as requested */}
           <h1 className="font-display font-light text-cream leading-[1.05] text-balance fade-up delay-1"
               style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
-            Personal training,{" "}
-            <em className="font-light italic text-warm">delivered.</em>
+            Private personal training,{" "}
+            <em className="font-light italic text-warm">delivered to your home.</em>
           </h1>
           <p className="mt-6 text-cream/60 text-base lg:text-lg leading-relaxed max-w-xl font-body font-light fade-up delay-2">
             Certified trainers come to your home, fully equipped. No gym.
             No commute. No wasted time. Just consistent, professional
             training built around your life.
           </p>
+          {/* Updated: Primary CTA prominent, secondary less prominent */}
           <div className="mt-10 flex flex-col sm:flex-row gap-4 fade-up delay-3">
             <Button href="/apply" size="lg" variant="light">
               Apply for Membership
             </Button>
-            <Button href="#how-it-works" size="lg" variant="ghost">
+            <Button href="#how-it-works" size="lg" variant="ghost" className="opacity-80 hover:opacity-100">
               See How It Works
             </Button>
           </div>
         </div>
 
-        {/* Stat strip */}
+        {/* Stat strip - Added "not a marketplace" emphasis */}
         <div className="mt-16 pt-8 border-t border-cream/10 grid grid-cols-3 gap-6 max-w-lg fade-up delay-4">
           {[
             ["Vetted Trainers",     "Every trainer certified & background checked"],
             ["Equipment Included",  "Professional gear at every session"],
-            ["No Gym Required",     "Train in your home or private space"],
+            ["Not a Marketplace",   "Direct, curated training experience"],
           ].map(([title, sub]) => (
             <div key={title}>
               <p className="text-cream text-xs font-body font-medium leading-tight">{title}</p>

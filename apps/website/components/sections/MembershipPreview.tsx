@@ -6,12 +6,14 @@ const plans = [
     freq: "1x / week",
     sessions: "4 sessions / month",
     price: "$520",
+    duration: "45-60 minute sessions",
     note: "Ideal for getting started and building routine",
   },
   {
     freq: "2x / week",
     sessions: "8 sessions / month",
     price: "$980",
+    duration: "45-60 minute sessions",
     note: "Most popular — measurable results, manageable commitment",
     featured: true,
   },
@@ -19,6 +21,7 @@ const plans = [
     freq: "3x / week",
     sessions: "12 sessions / month",
     price: "$1,380",
+    duration: "45-60 minute sessions",
     note: "Maximum results for committed clients",
   },
 ];
@@ -73,10 +76,16 @@ export default function MembershipPreview() {
               }`}>
                 {p.price}
               </p>
-              <p className={`text-xs mb-8 font-body ${
+              <p className={`text-xs mb-2 font-body ${
                 p.featured ? "text-muted" : "text-cream/30"
               }`}>
                 {p.sessions}
+              </p>
+              {/* NEW: Session duration added */}
+              <p className={`text-[10px] mb-6 font-body ${
+                p.featured ? "text-muted/70" : "text-cream/40"
+              }`}>
+                {p.duration}
               </p>
               <p className={`text-sm leading-relaxed mt-auto font-body ${
                 p.featured ? "text-muted" : "text-cream/50"

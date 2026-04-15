@@ -5,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "FAQ",
+  title: "FAQ | FORMED",
   description:
     "Frequently asked questions about FORMED private personal training in Tampa Bay.",
 };
@@ -62,7 +62,7 @@ const faqs = [
       },
       {
         q: "How does billing work?",
-        a: "Memberships are billed monthly. Payment is collected after each booking is confirmed through your client portal.",
+        a: "Memberships are billed monthly. Your payment method is charged automatically at the beginning of each month for your selected membership tier. No per-booking fees, no surprise charges — just simple, predictable monthly billing.",
       },
       {
         q: "What is the cancellation policy?",
@@ -79,7 +79,7 @@ const faqs = [
     items: [
       {
         q: "How does the application process work?",
-        a: "You apply, we review your application within 24 hours, and if there is a fit we onboard you, match you with a trainer, and schedule your first session.",
+        a: "You apply, we review your application within 24-48 hours, match you with a vetted trainer, and schedule your first session delivered directly to you.",
       },
       {
         q: "What areas do you serve?",

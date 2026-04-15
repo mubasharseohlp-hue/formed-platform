@@ -42,9 +42,45 @@ export default function ApplyPage() {
             <div className="max-w-lg mx-auto lg:mx-0 pt-10">
               <p className="text-[10px] tracking-ultra uppercase text-muted mb-3 font-body">Apply</p>
               <h1 className="font-display text-4xl font-light text-ink mb-2">Apply for Membership</h1>
-              <p className="text-muted text-sm leading-relaxed mb-12 font-body">
+              <p className="text-muted text-sm leading-relaxed mb-6 font-body">
                 A membership-based service with limited availability. We review every application personally.
               </p>
+
+              {/* NEW: What happens next section */}
+              <div className="bg-stone/30 p-5 mb-8 rounded-sm">
+                <p className="text-[10px] tracking-ultra uppercase text-muted mb-3 font-body">
+                  What happens next
+                </p>
+                <p className="text-sm text-ink leading-relaxed font-body">
+                  We review your application within 24–48 hours, match you with a vetted trainer, 
+                  and schedule your first session, delivered directly to you.
+                </p>
+              </div>
+
+              {/* NEW: Progress indicator */}
+              <div className="mb-8">
+                <div className="flex items-center justify-between">
+                  {[
+                    { step: 1, label: "Apply" },
+                    { step: 2, label: "Review" },
+                    { step: 3, label: "Match" },
+                    { step: 4, label: "Train" },
+                  ].map((item, idx) => (
+                    <div key={item.step} className="flex-1">
+                      <div className="flex flex-col items-center">
+                        <div className="w-8 h-8 rounded-full bg-stone flex items-center justify-center">
+                          <span className="text-[10px] font-body text-muted">{item.step}</span>
+                        </div>
+                        <p className="text-[9px] text-muted font-body mt-2">{item.label}</p>
+                      </div>
+                      {idx < 3 && (
+                        <div className="flex-1 h-px bg-stone mt-4 -ml-1" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <ApplyForm />
             </div>
           </div>

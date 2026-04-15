@@ -5,216 +5,196 @@ import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Personal Training Tampa Bay",
-  description:
-    "Private in-home personal training across Tampa Bay. Serving Downtown Tampa, Hyde Park, South Tampa, Channelside, Westshore and surrounding areas.",
+  title: "Tampa Bay | FORMED",
+  description: "Premium in-home personal training for Tampa Bay professionals. No commute, no crowds, no excuses. Apply today.",
 };
-
-const areas = [
-  "Downtown Tampa",
-  "Hyde Park",
-  "Channelside",
-  "Westshore",
-  "South Tampa",
-  "Davis Islands",
-  "Palma Ceia",
-  "Seminole Heights",
-  "Harbour Island",
-  "Surrounding neighbourhoods",
-];
-
-const reasons = [
-  {
-    title: "No driving in traffic",
-    description:
-      "Your trainer comes to you. No commute, no parking, no wasted time.",
-  },
-  {
-    title: "No crowded gyms",
-    description:
-      "Train in complete privacy — your home, your condo gym, or any private space.",
-  },
-  {
-    title: "Flexible scheduling",
-    description:
-      "Early morning, midday, or evening — we build around your calendar.",
-  },
-  {
-    title: "Consistent trainer",
-    description:
-      "Same trainer every session. Continuity is the foundation of real results.",
-  },
-];
-
-const partnerships = [
-  "Luxury apartment communities",
-  "Corporate offices & executive teams",
-  "Private clubs & residences",
-  "Hotels & hospitality",
-];
 
 export default function TampaPage() {
   return (
     <>
       <Navbar />
       <main>
-        {/* Hero — Tampa skyline */}
-        <section className="relative h-[80vh] min-h-[560px] flex items-end overflow-hidden">
+        {/* Hero */}
+        <section className="relative h-[70vh] min-h-[500px] flex items-end overflow-hidden">
           <div className="absolute inset-0">
             <Image
-              src="https://images.unsplash.com/photo-1605723517503-3cadb5818a0c?w=1920&auto=format&fit=crop&q=80"
-              alt="Tampa Bay"
+              src="https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=1920&auto=format&fit=crop&q=80"
+              alt="Tampa Bay skyline"
               fill
               priority
               className="object-cover object-center"
             />
             <div className="absolute inset-0 bg-ink/55" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
           </div>
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10 pb-16 lg:pb-24 w-full">
             <p className="text-[10px] tracking-ultra uppercase text-cream/50 mb-3 font-body">
               Tampa Bay
             </p>
-            <h1
-              className="font-display font-light text-cream leading-tight max-w-3xl"
-              style={{ fontSize: "clamp(3rem, 7vw, 6rem)" }}
-            >
-              Personal training,{" "}
-              <em className="italic font-light text-warm">
-                delivered in Tampa Bay.
-              </em>
+            <h1 className="font-display font-light text-cream leading-tight max-w-2xl"
+                style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
+              Premium in-home training,<br />
+              <em className="font-light italic text-warm">delivered to Tampa Bay.</em>
             </h1>
-            <p className="mt-6 text-cream/60 text-base max-w-xl font-body font-light leading-relaxed">
-              Private, in-home personal training for Tampa Bay professionals
-              who value their time.
-            </p>
           </div>
         </section>
 
-        {/* Areas we serve */}
-        <section className="bg-cream py-24 lg:py-36">
+        {/* NEW: Why FORMED in Tampa Section */}
+        <section className="bg-cream py-24 lg:py-32">
           <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
-              <div>
-                <p className="text-[10px] tracking-ultra uppercase text-muted mb-6 font-body">
-                  Areas We Serve
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <p className="text-[10px] tracking-ultra uppercase text-muted mb-4 font-body">
+                Tampa Bay
+              </p>
+              <h2 className="font-display font-light text-ink text-4xl lg:text-5xl mb-6 leading-tight">
+                Why FORMED in Tampa Bay
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6 text-muted text-sm leading-relaxed font-body">
+                <p>
+                  Tampa is built for movement, but busy professionals don't always have time to 
+                  commute, wait for equipment, or deal with crowded gyms.
                 </p>
-                <div className="space-y-0 border-t border-stone">
-                  {areas.map((area) => (
-                    <div
-                      key={area}
-                      className="flex items-center gap-4 py-4 border-b border-stone"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-warm flex-shrink-0" />
-                      <span className="text-ink text-sm font-body">{area}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-muted text-xs font-body mt-6 tracking-wide">
-                  Not sure if we serve your area? Apply and we&apos;ll confirm availability.
+                <p>
+                  FORMED brings a <strong className="text-ink">premium, private fitness experience directly to you</strong>.
                 </p>
-              </div>
-
-              <div>
-                <p className="text-[10px] tracking-ultra uppercase text-muted mb-6 font-body">
-                  Why Tampa Professionals Choose FORMED
+                <p>
+                  Whether you live in a high-rise downtown, a South Tampa home, or a waterfront condo, 
+                  our trainers deliver structured, results-driven sessions without disrupting your schedule.
                 </p>
-                <div className="space-y-0">
-                  {reasons.map((r, i) => (
-                    <div
-                      key={r.title}
-                      className={`py-8 ${
-                        i < reasons.length - 1 ? "border-b border-stone" : ""
-                      }`}
-                    >
-                      <h3 className="font-display text-xl font-medium text-ink mb-2">
-                        {r.title}
-                      </h3>
-                      <p className="text-muted text-sm leading-relaxed font-body">
-                        {r.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-10">
-                  <Button href="/apply" size="lg">
-                    Check Availability
+                <div className="pt-4">
+                  <Button href="/apply" size="lg" variant="dark">
+                    Apply for Membership
                   </Button>
                 </div>
               </div>
+              <div className="overflow-hidden rounded-lg">
+                <Image
+                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop&q=80"
+                  alt="Tampa training session"
+                  width={800}
+                  height={600}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Image divider */}
-        <div className="relative h-[50vh] min-h-[400px] overflow-hidden">
-          <Image
-            src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?w=1920&auto=format&fit=crop&q=80"
-            alt="In-home personal training"
-            fill
-            className="object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-ink/40" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <p
-              className="font-display font-light text-cream text-center px-6"
-              style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
-            >
-              We bring the trainer to{" "}
-              <em className="italic text-warm">you.</em>
-            </p>
-          </div>
-        </div>
-
-        {/* Corporate & Partnerships */}
-        <section className="bg-ink py-24 lg:py-36">
+        {/* How It Works (Localized) */}
+        <section className="bg-stone py-24 lg:py-32">
           <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start">
-              <div>
-                <p className="text-[10px] tracking-ultra uppercase text-warm/40 mb-4 font-body">
-                  Corporate Wellness
-                </p>
-                <h2 className="font-display text-4xl font-light text-cream mb-6 leading-tight">
-                  Private on-site training for teams.
-                </h2>
-                <p className="text-cream/50 text-sm leading-relaxed mb-8 font-body">
-                  Available for executive teams and leadership groups across
-                  Tampa Bay. Contact us to discuss scheduling and availability.
-                </p>
-                
-                 <a href="mailto:hello@formed.fit"
-                  className="text-[10px] tracking-ultra uppercase text-warm hover:text-cream transition-colors font-body"
-                >
-                  hello@formed.fit &rarr;
-                </a>
-              </div>
-
-              <div>
-                <p className="text-[10px] tracking-ultra uppercase text-warm/40 mb-6 font-body">
-                  We Partner With
-                </p>
-                <div className="space-y-0 border-t border-cream/10">
-                  {partnerships.map((p) => (
-                    <div
-                      key={p}
-                      className="flex items-center gap-4 py-4 border-b border-cream/10"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-warm flex-shrink-0" />
-                      <span className="text-cream/70 text-sm font-body">{p}</span>
-                    </div>
-                  ))}
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <p className="text-[10px] tracking-ultra uppercase text-muted mb-4 font-body">
+                Simple Process
+              </p>
+              <h2 className="font-display font-light text-ink text-4xl lg:text-5xl mb-4 leading-tight">
+                How it works in Tampa Bay
+              </h2>
+              <p className="text-muted text-sm font-body">
+                From application to your first session — usually within 48 hours.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  step: "01",
+                  title: "Apply",
+                  description: "Tell us about your goals, schedule, and preferred training location.",
+                },
+                {
+                  step: "02",
+                  title: "Match",
+                  description: "We match you with a vetted trainer based on your needs and neighborhood.",
+                },
+                {
+                  step: "03",
+                  title: "Train",
+                  description: "Your trainer arrives fully equipped. No gym. No commute. Just results.",
+                },
+              ].map((item) => (
+                <div key={item.step} className="text-center">
+                  <p className="text-[40px] lg:text-[60px] font-display font-light text-warm/30 leading-none mb-4">
+                    {item.step}
+                  </p>
+                  <h3 className="font-display text-xl text-ink mb-2">{item.title}</h3>
+                  <p className="text-muted text-sm font-body">{item.description}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Coverage Area */}
+        <section className="bg-cream py-24 lg:py-32">
+          <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div className="order-2 lg:order-1">
+                <p className="text-[10px] tracking-ultra uppercase text-muted mb-4 font-body">
+                  Coverage Area
+                </p>
+                <h2 className="font-display font-light text-ink text-4xl lg:text-5xl mb-6 leading-tight">
+                  Where we train
+                </h2>
+                <div className="space-y-4 text-muted text-sm leading-relaxed font-body mb-8">
+                  <p>
+                    FORMED currently serves the greater Tampa Bay area, including:
+                  </p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      "South Tampa",
+                      "Downtown Tampa",
+                      "Channelside",
+                      "Hyde Park",
+                      "Davis Islands",
+                      "Harbour Island",
+                      "Westshore",
+                      "Carrollwood",
+                      "St. Petersburg",
+                      "Clearwater",
+                    ].map((area) => (
+                      <div key={area} className="flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-warm" />
+                        <span className="text-muted text-sm font-body">{area}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <Button href="/apply" size="lg" variant="dark">
+                  Apply to get started
+                </Button>
+              </div>
+              <div className="order-1 lg:order-2 overflow-hidden rounded-lg">
+                <Image
+                  src="https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=800&auto=format&fit=crop&q=80"
+                  alt="Tampa Bay area"
+                  width={800}
+                  height={600}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Expansion footer strip */}
-        <div className="bg-ink border-t border-cream/10 py-5 text-center">
-          <p className="text-[10px] tracking-ultra uppercase text-muted font-body">
-            Currently serving Tampa Bay &nbsp;·&nbsp; New cities launching soon
-          </p>
-        </div>
+        {/* CTA Banner */}
+        <section className="bg-ink py-20 lg:py-28">
+          <div className="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+            <p className="text-[10px] tracking-ultra uppercase text-warm mb-4 font-body">
+              Limited Availability
+            </p>
+            <h2 className="font-display font-light text-cream text-4xl lg:text-5xl mb-6 leading-tight max-w-3xl mx-auto">
+              Ready to train differently?
+            </h2>
+            <p className="text-cream/50 text-sm font-body mb-8 max-w-md mx-auto">
+              Apply today. We follow up within 24 hours.
+            </p>
+            <Button href="/apply" size="lg" variant="light">
+              Apply for Membership
+            </Button>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
