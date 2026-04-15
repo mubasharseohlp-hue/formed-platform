@@ -14,8 +14,11 @@ export default function TampaPage() {
     <>
       <Navbar />
       <main>
-        {/* Hero */}
-        <section className="relative h-[70vh] min-h-[500px] flex items-end overflow-hidden">
+        {/* Hero - Using the same fix that worked for homepage */}
+        <section 
+          className="relative min-h-[70vh] flex flex-col justify-end overflow-hidden"
+          style={{ paddingTop: "80px", marginTop: "0px" }}
+        >
           <div className="absolute inset-0">
             <Image
               src="https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=1920&auto=format&fit=crop&q=80"
@@ -23,6 +26,7 @@ export default function TampaPage() {
               fill
               priority
               className="object-cover object-center"
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-ink/55" />
             <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
@@ -39,7 +43,7 @@ export default function TampaPage() {
           </div>
         </section>
 
-        {/* NEW: Why FORMED in Tampa Section */}
+        {/* Why FORMED in Tampa Section */}
         <section className="bg-cream py-24 lg:py-32">
           <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
             <div className="max-w-3xl mx-auto text-center mb-16">
