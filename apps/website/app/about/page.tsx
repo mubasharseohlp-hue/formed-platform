@@ -70,7 +70,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Founder Story Section */}
+        {/* Founder Story Section - Fixed Image */}
         <section className="bg-stone py-24 lg:py-36">
           <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -96,21 +96,19 @@ export default function AboutPage() {
                   </p>
                 </div>
                 <div className="mt-8">
-                  {/* Fixed: Changed variant from "primary" to "dark" */}
                   <Button href="/apply" size="lg" variant="dark">
                     Apply to get started with FORMED today
                   </Button>
                 </div>
               </div>
-              <div className="order-1 lg:order-2 overflow-hidden rounded-lg">
-                <div className="aspect-square bg-ink/5 flex items-center justify-center">
-                  {/* Founder Headshot - Using your actual image */}
+              <div className="order-1 lg:order-2">
+                <div className="relative aspect-square w-full max-w-md mx-auto lg:max-w-full">
                   <Image
                     src="/images/rodney-headshot.png"
                     alt="Rodney Cilien, Founder of FORMED"
-                    width={400}
-                    height={400}
-                    className="w-full h-full object-cover rounded-lg"
+                    fill
+                    className="object-cover object-top rounded-lg"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
               </div>
