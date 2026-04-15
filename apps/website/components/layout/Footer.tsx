@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const cols = [
   {
@@ -35,7 +36,16 @@ export default function Footer() {
       <div className="max-w-screen-xl mx-auto px-6 lg:px-10 pt-20 pb-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-16 border-b border-cream/10">
           <div className="col-span-2 lg:col-span-1">
-            <p className="font-display text-2xl font-light tracking-wide mb-4">FORMED</p>
+            {/* Logo instead of text */}
+            <Link href="/" className="inline-block mb-4">
+              <Image
+                src="/images/logo-dark.png"
+                alt="FORMED"
+                width={360}
+                height={100}
+                className="w-auto h-12 lg:h-14 object-contain"
+              />
+            </Link>
             <p className="text-warm text-sm leading-relaxed max-w-xs">
               Private, in-home personal training for busy professionals.
             </p>
