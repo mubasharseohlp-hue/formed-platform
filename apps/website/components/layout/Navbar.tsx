@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -34,15 +35,16 @@ export default function Navbar() {
         <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-20 lg:h-24">
 
-            {/* Logo — text only, no image */}
-            <Link
-              href="/"
-              className={cn(
-                "font-display text-2xl font-light tracking-[0.2em] uppercase transition-colors duration-300",
-                scrolled ? "text-ink" : "text-cream"
-              )}
-            >
-              FORMED
+            {/* Logo — switches based on scroll state */}
+            <Link href="/" className="flex items-center">
+              <Image
+                src={scrolled ? "/images/logo-light.png" : "/images/logo-dark.png"}
+                alt="FORMED"
+                width={200}
+                height={80}
+                className="w-auto h-16 lg:h-20 object-contain"
+                priority
+              />
             </Link>
 
             {/* Desktop nav */}
