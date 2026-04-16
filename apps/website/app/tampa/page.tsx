@@ -171,7 +171,7 @@ export default function TampaPage() {
               </div>
               <div className="order-1 lg:order-2 overflow-hidden rounded-lg">
                 <Image
-                  src="https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=800&auto=format&fit=crop&q=80"
+                  src="/images/tampa-bay.png"
                   alt="Tampa Bay area"
                   width={800}
                   height={600}
