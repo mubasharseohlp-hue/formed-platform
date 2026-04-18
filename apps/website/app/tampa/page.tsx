@@ -21,7 +21,7 @@ export default function TampaPage() {
         >
           <div className="absolute inset-0">
             <Image
-              src="https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=1920&auto=format&fit=crop&q=80"
+              src="/images/dev-coordination.png"  // Added leading slash
               alt="Tampa Bay skyline"
               fill
               priority
@@ -171,7 +171,7 @@ export default function TampaPage() {
               </div>
               <div className="order-1 lg:order-2 overflow-hidden rounded-lg">
                 <Image
-                  src="/images/tampa-bay.png"
+                  src="/images/tampa-bay.png"  // Added leading slash
                   alt="Tampa Bay area"
                   width={800}
                   height={600}
