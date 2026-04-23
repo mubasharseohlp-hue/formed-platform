@@ -39,10 +39,13 @@ export default function PayoutActions({
         </>
       )}
       {currentStatus === "approved" && (
-        <button onClick={() => update("paid")} disabled={!!loading}
-          className="text-[10px] tracking-widests uppercase font-body bg-green-600 text-white px-4 py-2 hover:bg-green-700 transition-colors disabled:opacity-50">
-          {loading === "paid" ? "..." : "Mark Paid"}
-        </button>
+        <div>
+          <p className="text-[10px] text-muted font-body mb-2">Process payment outside platform, then:</p>
+          <button onClick={() => update("paid")} disabled={!!loading}
+            className="text-[10px] tracking-widests uppercase font-body bg-green-600 text-white px-4 py-2 hover:bg-green-700 transition-colors disabled:opacity-50">
+            {loading === "paid" ? "..." : "Confirm Paid"}
+          </button>
+        </div>
       )}
     </div>
   );

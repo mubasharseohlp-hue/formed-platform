@@ -134,16 +134,17 @@ export default async function AdminDashboardPage() {
       )}
 
       {/* KPI Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3">
-        <StatCard label="Active Clients"   value={activeClients ?? 0}              sub="members"         accent />
-        <StatCard label="Active Trainers"  value={activeTrainers ?? 0}             sub="on platform" />
-        <StatCard label="MRR"              value={formatCurrency(mrr)}             sub="monthly recurring" />
-        <StatCard label="New Apps"         value={newAppsThisWeek ?? 0}            sub="this week" />
-        <StatCard label="Unmatched"        value={unmatchedClients ?? 0}           sub="awaiting match" />
-        <StatCard label="Failed Payments"  value={failedPayments ?? 0}             sub="need action" />
-        <StatCard label="Open Tickets"     value={openTickets ?? 0}               sub="support" />
-        <StatCard label="Sessions"         value={sessionsThisWeek ?? 0}           sub="this week" />
-      </div>
+      
+<div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3">
+  <Link href="/admin/clients"><StatCard label="Active Clients"  value={activeClients ?? 0}   sub="members"       accent /></Link>
+  <Link href="/admin/trainers"><StatCard label="Active Trainers" value={activeTrainers ?? 0}  sub="on platform" /></Link>
+  <Link href="/admin/billing"><StatCard label="MRR"              value={formatCurrency(mrr)}  sub="monthly recurring" /></Link>
+  <Link href="/admin/applications/clients"><StatCard label="New Apps" value={newAppsThisWeek ?? 0} sub="this week" /></Link>
+  <Link href="/admin/matching"><StatCard label="Unmatched"       value={unmatchedClients ?? 0} sub="awaiting match" /></Link>
+  <Link href="/admin/billing"><StatCard label="Failed Payments"  value={failedPayments ?? 0}  sub="need action" /></Link>
+  <Link href="/admin/tickets"><StatCard label="Open Tickets"     value={openTickets ?? 0}     sub="support" /></Link>
+  <Link href="/admin/sessions"><StatCard label="Sessions"        value={sessionsThisWeek ?? 0} sub="this week" /></Link>
+</div>
 
       {/* Main grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -235,28 +236,36 @@ export default async function AdminDashboardPage() {
 
           {/* Missing notes */}
           {missingNotes && missingNotes.length > 0 && (
+  <div>
+    <SectionHeader title="Missing Session Notes" />
+    <div className="space-y-2">
+      {missingNotes.map((s) => (
+        <Card key={s.id} padding="sm" className="border-l-2 border-l-red-300">
+          <div className="flex items-center justify-between gap-4">
             <div>
-              <SectionHeader title="Missing Session Notes" />
-              <div className="space-y-2">
-                {missingNotes.map((s) => (
-                  <Card key={s.id} padding="sm" className="border-l-2 border-l-red-300">
-                    <div className="flex items-center justify-between gap-4">
-                      <div>
-                        <p className="text-sm font-body font-medium text-ink">
-                          {s.clients?.full_name}
-                        </p>
-                        <p className="text-xs text-muted font-body">
-                          {formatDate(s.date_time)} · Trainer: {s.trainers?.full_name}
-                        </p>
-                      </div>
-                      <span className="text-[10px] tracking-widest uppercase font-body text-red-500 bg-red-50 px-2 py-1">
-                        Overdue
-                      </span>
-                    </div>
-                  </Card>
-                ))}
-              </div>
+              <p className="text-sm font-body font-medium text-ink">
+                {s.clients?.full_name}
+              </p>
+              <p className="text-xs text-muted font-body">
+                {formatDate(s.date_time)} · Trainer: {s.trainers?.full_name}
+              </p>
             </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] tracking-widests uppercase font-body text-red-500 bg-red-50 px-2 py-1">
+                Overdue
+              </span>
+              <Link
+                href={`/admin/sessions/${s.id}`}
+                className="text-[10px] tracking-widests uppercase font-body text-muted hover:text-ink transition-colors"
+              >
+                View Session →
+              </Link>
+            </div>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </div>
           )}
         </div>
 

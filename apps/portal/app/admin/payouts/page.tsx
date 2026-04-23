@@ -38,9 +38,9 @@ export default async function AdminPayoutsPage() {
       {/* Pending payouts */}
       {pendingCount > 0 && (
         <div>
-          <p className="text-[10px] tracking-widets uppercase text-muted mb-3 font-body">
-            Requested — Awaiting Approval
-          </p>
+          <p className="text-[10px] tracking-widests uppercase text-muted mb-3 font-body">
+  Requested — Awaiting Approval ({payouts?.filter(p => p.status === "requested").length ?? 0})
+</p>
           <div className="space-y-2">
             {payouts?.filter(p => p.status === "requested").map((p) => (
               <Card key={p.id} className="border-l-2 border-l-yellow-400">

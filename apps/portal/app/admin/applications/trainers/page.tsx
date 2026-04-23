@@ -1,3 +1,8 @@
+// ⚠️ THESE MUST BE AT THE VERY TOP ⚠️
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
+
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import SectionHeader from "@/components/portal/ui/SectionHeader";
@@ -6,7 +11,7 @@ import Badge from "@/components/portal/ui/Badge";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
-export const dynamic = 'force-dynamic';
+
 const STATUS_FILTERS = [
   "all", "submitted", "under_review", "interview_requested",
   "approved_pending_docs", "approved_pending_training", "active", "restricted", "rejected"
@@ -15,15 +20,16 @@ const STATUS_FILTERS = [
 export default async function TrainerApplicationsPage({
   searchParams
 }: { 
-  searchParams: Promise<{ status?: string }>  // ← Make it a Promise
+  searchParams: Promise<{ status?: string }>
 }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/auth/login");
 
-  // ✅ Await the searchParams
   const params = await searchParams;
   const status = params.status ?? "submitted";
+
+  console.log(`[Server] Fetching trainers with status: ${status}`);
 
   let query = supabase
     .from("trainers")
@@ -45,11 +51,13 @@ export default async function TrainerApplicationsPage({
 
       <div className="flex gap-1 flex-wrap border-b border-stone pb-0 overflow-x-auto">
         {STATUS_FILTERS.map(s => (
-          <Link key={s}
+          <Link 
+            key={s}
             href={`/admin/applications/trainers?status=${s}`}
             className={`px-3 py-2 text-[10px] tracking-widest uppercase font-body transition-colors border-b-2 -mb-px whitespace-nowrap ${
               status === s ? "border-ink text-ink" : "border-transparent text-muted hover:text-ink"
-            }`}>
+            }`}
+          >
             {s.replace(/_/g, " ")}
             {s !== "all" && countByStatus[s] ? (
               <span className="ml-1 text-[9px]">({countByStatus[s]})</span>

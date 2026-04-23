@@ -10,11 +10,13 @@ interface StatCardProps {
 export default function StatCard({ label, value, sub, accent }: StatCardProps) {
   return (
     <div className={cn(
-      "p-5 border",
-      accent ? "bg-ink border-ink text-cream" : "bg-white border-stone"
+      "p-5 border transition-all duration-150 hover:shadow-sm",
+      accent
+        ? "bg-ink border-ink text-cream hover:bg-accent"
+        : "bg-white border-stone hover:border-warm cursor-pointer"
     )}>
       <p className={cn(
-        "text-[10px] tracking-widest uppercase font-body mb-2",
+        "text-[10px] tracking-widests uppercase font-body mb-2",
         accent ? "text-cream/50" : "text-muted"
       )}>
         {label}

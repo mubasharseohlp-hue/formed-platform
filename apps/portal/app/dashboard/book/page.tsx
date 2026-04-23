@@ -15,9 +15,9 @@ const TIMES = [
 ];
 
 const SESSION_TYPES = [
-  { value: "recurring",          label: "Recurring Session" },
-  { value: "initial_assessment", label: "Initial Assessment" },
-  { value: "makeup",             label: "Makeup Session" },
+  { value: "recurring",          label: "Recurring Session",    desc: "Your weekly training session" },
+  { value: "initial_assessment", label: "Initial Assessment",   desc: "First session to build your plan" },
+  { value: "makeup",             label: "Makeup Session",       desc: "Reschedule a missed session" },
 ];
 
 export default function BookSessionPage() {
@@ -252,15 +252,20 @@ export default function BookSessionPage() {
             </p>
             <div className="space-y-2">
               {SESSION_TYPES.map(st => (
-                <label key={st.value} className="flex items-center gap-3 cursor-pointer">
+                <label key={st.value} className="flex items-start gap-3 cursor-pointer py-2">
                   <input
-                    type="radio" name="sessionType"
+                    type="radio"
+                    name="sessionType"
                     value={st.value}
                     checked={sessionType === st.value}
                     onChange={() => setSessionType(st.value)}
-                    className="accent-ink w-3.5 h-3.5"
+                    className="accent-ink w-3.5 h-3.5 mt-0.5"
                   />
-                  <span className="text-sm text-ink font-body">{st.label}</span>
+                  <div>
+                    <span className="text-sm text-ink font-body font-medium">{st.label}</span>
+                    <p className="text-xs text-muted font-body">{st.desc}</p>
+                    <p className="text-[10px] text-muted/70 font-body">Included in your plan</p>
+                  </div>
                 </label>
               ))}
             </div>
@@ -274,7 +279,7 @@ export default function BookSessionPage() {
             <textarea
               rows={3}
               className="w-full border-b border-stone bg-transparent text-sm text-ink placeholder:text-muted/50 focus:outline-none focus:border-ink transition-colors font-body resize-none"
-              placeholder="Specific goals, location details, injuries to flag..."
+              placeholder="Anything your trainer should know? (goals, injuries, preferences)"
               value={notes}
               onChange={e => setNotes(e.target.value)}
             />
@@ -286,12 +291,11 @@ export default function BookSessionPage() {
             disabled={!selectedDate || !selectedTime || loading}
             className="w-full bg-ink text-cream text-[10px] tracking-widest uppercase font-body py-4 hover:bg-accent transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            {loading ? "Submitting..." : "Request Session"}
+            {loading ? "Submitting..." : "Book My Session"}
           </button>
 
           <p className="text-[10px] text-muted font-body text-center leading-relaxed">
-            Session requests are confirmed by your trainer.
-            You&apos;ll be notified by email once accepted.
+            Your trainer will confirm your session shortly.
           </p>
         </div>
       </div>

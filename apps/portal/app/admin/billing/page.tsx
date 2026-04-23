@@ -24,45 +24,61 @@ export default async function AdminBillingPage() {
   const { data: activeClients } = await supabase
     .from("clients").select("monthly_rate").eq("status", "active");
 
-  const mrr          = activeClients?.reduce((s, c) => s + (c.monthly_rate ?? 0), 0) ?? 0;
-  const totalFailed  = payments?.filter(p => p.status === "failed").length ?? 0;
-  const totalRefunded = payments?.filter(p => p.status === "refunded").reduce((s, p) => s + (p.refunded_amount ?? 0), 0) ?? 0;
-  const revenueMonth = payments?.filter(p => p.status === "paid" && p.created_at >= startOfMonth)
-    .reduce((s, p) => s + p.amount, 0) ?? 0;
+  const mrr = activeClients?.reduce((s, c) => s + (c.monthly_rate ?? 0), 0) ?? 0;
+  
+  const grossRevenue   = payments?.filter(p => p.status === "paid" && p.created_at >= startOfMonth).reduce((s, p) => s + p.amount, 0) ?? 0;
+  const refundedAmount = payments?.filter(p => p.status === "refunded" && p.created_at >= startOfMonth).reduce((s, p) => s + (p.refunded_amount ?? 0), 0) ?? 0;
+  const netRevenue     = grossRevenue - refundedAmount;
 
   return (
     <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-8">
       <SectionHeader title="Billing & Payments" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <StatCard label="MRR"              value={formatCurrency(mrr)}             sub="monthly recurring" accent />
-        <StatCard label="Revenue This Month" value={formatCurrency(revenueMonth)}  sub="collected" />
-        <StatCard label="Failed Payments"  value={totalFailed}                     sub="need action" />
-        <StatCard label="Refunded"         value={formatCurrency(totalRefunded)}   sub="all time" />
+        <StatCard label="MRR"                value={formatCurrency(mrr)}           sub="projected monthly"    accent />
+        <StatCard label="Gross This Month"   value={formatCurrency(grossRevenue)}  sub="before refunds" />
+        <StatCard label="Refunded"           value={formatCurrency(refundedAmount)} sub="this month" />
+        <StatCard label="Net This Month"     value={formatCurrency(netRevenue)}    sub="collected" />
       </div>
 
       <div>
         <SectionHeader title="Payment History" />
         <div className="space-y-2">
           {payments?.map((p) => (
-            <Card key={p.id} padding="sm">
-              <div className="flex items-center justify-between gap-4 flex-wrap">
-                <div>
-                  <p className="font-body font-medium text-ink text-sm">
-                    {p.clients?.full_name} — {formatCurrency(p.amount)}
-                  </p>
-                  <p className="text-muted text-xs font-body">{formatDate(p.created_at)}</p>
-                  {p.failure_reason && (
-                    <p className="text-red-500 text-xs font-body">{p.failure_reason}</p>
-                  )}
-                </div>
-                <Badge status={p.status} />
-                {p.status === "paid" && (
-  <RefundButton paymentId={p.id} amount={p.amount} />
-)}
-              </div>
-            </Card>
-          ))}
+  <Card key={p.id} padding="sm">
+    <div className="flex items-center justify-between gap-4 flex-wrap">
+      <div>
+        <p className="font-body font-medium text-ink text-sm">
+          {p.clients?.full_name} — {formatCurrency(p.amount)}
+        </p>
+        <p className="text-muted text-xs font-body">{formatDate(p.created_at)}</p>
+        {p.failure_reason && (
+          <p className="text-red-500 text-xs font-body">{p.failure_reason}</p>
+        )}
+        {p.status === "refunded" && p.refunded_amount && (
+          <p className="text-xs text-muted font-body">
+            Refunded: {formatCurrency(p.refunded_amount)}
+          </p>
+        )}
+      </div>
+      <div className="flex items-center gap-3">
+        {/* Clearer status — Paid → Refunded when applicable */}
+        <span className={`text-[10px] tracking-widests uppercase font-body px-2.5 py-1 ${
+          p.status === "paid"     ? "bg-green-100 text-green-700" :
+          p.status === "refunded" ? "bg-gray-100 text-gray-600" :
+          p.status === "failed"   ? "bg-red-100 text-red-700" :
+          "bg-yellow-100 text-yellow-700"
+        }`}>
+          {p.status === "refunded" ? "Paid → Refunded" : p.status}
+        </span>
+        {/* Refund button — only if paid AND not already refunded */}
+        {p.status === "paid" && (
+          <RefundButton paymentId={p.id} amount={p.amount} />
+        )}
+      </div>
+    </div>
+  </Card>
+))}
           {(!payments || payments.length === 0) && (
             <Card>
               <p className="text-center text-muted text-sm font-body py-8">No payments yet.</p>

@@ -14,7 +14,13 @@ body {
   color: #0C0C0B;
   font-family: var(--font-body), system-ui, sans-serif;
 }
-
+/* Hover states for clickable rows */
+a > div[class*="border-stone"] {
+  transition: border-color 0.15s ease;
+}
+a > div[class*="border-stone"]:hover {
+  border-color: var(--warm, #C8C2B4);
+}
 ::selection { background: #0C0C0B; color: #F5F2EC; }
 
 ::-webkit-scrollbar       { width: 4px; }
