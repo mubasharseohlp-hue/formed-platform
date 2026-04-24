@@ -93,7 +93,7 @@ export default async function TrainerProfilePage() {
 
           {/* Edit profile button */}
           
-           <a href="mailto:hello@formed.fit?subject=Profile Update Request"
+          <a  href="mailto:hello@formed.fit?subject=Profile Update Request"
             className="text-[10px] tracking-widests uppercase font-body border border-cream/30 text-cream/60 hover:text-cream hover:border-cream transition-colors px-4 py-2 flex-shrink-0"
           >
             Request Update
@@ -144,7 +144,7 @@ export default async function TrainerProfilePage() {
                 </div>
               </div>
               
-              <a  href="mailto:hello@formed.fit?subject=Document Update"
+               <a href="mailto:hello@formed.fit?subject=Document Update"
                 className="flex-shrink-0 text-[10px] tracking-widests uppercase font-body bg-red-600 text-white px-4 py-2 hover:bg-red-700 transition-colors"
               >
                 Update Now
@@ -167,7 +167,7 @@ export default async function TrainerProfilePage() {
                   </div>
                 </div>
                 
-                 <a href="mailto:hello@formed.fit?subject=Document Update"
+                <a  href="mailto:hello@formed.fit?subject=Document Update"
                   className="flex-shrink-0 text-[10px] tracking-widests uppercase font-body border border-yellow-400 text-yellow-700 px-4 py-2 hover:bg-yellow-100 transition-colors"
                 >
                   Update
@@ -258,7 +258,7 @@ export default async function TrainerProfilePage() {
             Documents & Compliance
           </p>
           
-           <a href="mailto:hello@formed.fit?subject=Document Upload"
+          <a  href="mailto:hello@formed.fit?subject=Document Upload"
             className="text-[10px] tracking-widests uppercase font-body text-muted hover:text-ink transition-colors"
           >
             Submit Document →

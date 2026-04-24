@@ -141,7 +141,7 @@ export default async function ClientDetailPage({
             <div className="space-y-3">
               {client.email && (
                 
-                  href={`mailto:${client.email}`}
+                <a  href={`mailto:${client.email}`}
                   className="flex items-center gap-3 text-sm text-ink hover:text-muted transition-colors group"
                 >
                   <Mail size={14} className="text-muted group-hover:text-ink transition-colors" />
@@ -150,7 +150,7 @@ export default async function ClientDetailPage({
               )}
               {client.phone && (
                 
-                  href={`tel:${client.phone}`}
+                 <a href={`tel:${client.phone}`}
                   className="flex items-center gap-3 text-sm text-ink hover:text-muted transition-colors group"
                 >
                   <Phone size={14} className="text-muted group-hover:text-ink transition-colors" />
