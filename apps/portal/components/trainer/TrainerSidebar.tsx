@@ -27,9 +27,10 @@ const nav = [
 interface TrainerSidebarProps {
   trainer: any;
   userEmail: string;
+  unreadCount?: number;
 }
 
-export default function TrainerSidebar({ trainer, userEmail }: TrainerSidebarProps) {
+export default function TrainerSidebar({ trainer, userEmail, unreadCount = 0 }: TrainerSidebarProps) {
   const pathname = usePathname();
   const router   = useRouter();
   const supabase = createClient();
@@ -66,6 +67,8 @@ export default function TrainerSidebar({ trainer, userEmail }: TrainerSidebarPro
         {nav.map(({ label, href, icon: Icon }) => {
           const active = pathname === href ||
             (href !== "/trainer" && pathname.startsWith(href));
+          const isMessages = href === "/trainer/messages";
+          
           return (
             <Link key={href} href={href}
               onClick={() => setOpen(false)}
@@ -80,7 +83,12 @@ export default function TrainerSidebar({ trainer, userEmail }: TrainerSidebarPro
                 "flex-shrink-0 transition-colors",
                 active ? "text-cream" : "text-muted group-hover:text-cream"
               )} />
-              {label}
+              <span>{label}</span>
+              {isMessages && unreadCount > 0 && (
+                <span className="ml-auto bg-warm text-ink text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-body">
+                  {unreadCount > 99 ? "99+" : unreadCount}
+                </span>
+              )}
             </Link>
           );
         })}
@@ -102,7 +110,7 @@ export default function TrainerSidebar({ trainer, userEmail }: TrainerSidebarPro
                 width: `${Math.min(
                   ((trainer.current_client_count ?? 0) / (trainer.max_active_clients ?? 10)) * 100,
                   100
-                )}%`
+                )}`
               }}
             />
           </div>

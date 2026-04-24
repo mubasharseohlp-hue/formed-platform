@@ -87,14 +87,14 @@ export default async function AdminSessionsPage({
   return (
     <div className="p-6 lg:p-8 max-w-6xl mx-auto space-y-6">
       {/* VISIBLE DEBUG SECTION */}
-      <div className="bg-yellow-50 border-2 border-yellow-400 p-4 rounded-md mb-4">
+      {/* <div className="bg-yellow-50 border-2 border-yellow-400 p-4 rounded-md mb-4">
         <details open>
           <summary className="font-bold cursor-pointer">🔍 DEBUG INFO (Click to collapse)</summary>
           <pre className="text-xs mt-2 overflow-auto max-h-96 whitespace-pre-wrap bg-white p-2 rounded border">
             {JSON.stringify(debugInfo, null, 2)}
           </pre>
         </details>
-      </div>
+      </div> */}
 
       <SectionHeader title="Session Management" />
 
@@ -155,9 +155,9 @@ export default async function AdminSessionsPage({
                         <p className="text-muted text-xs font-body">
                           {formatTime(s.date_time)} · {s.session_type?.replace(/_/g, " ")}
                         </p>
-                        <p className="text-[9px] text-muted font-mono">
+                        {/* <p className="text-[9px] text-muted font-mono">
                           Client ID: {s.client_id?.slice(0, 8)}... | Trainer ID: {s.trainer_id?.slice(0, 8)}...
-                        </p>
+                        </p> */}
                       </div>
                     </div>
                     <div className="flex items-center gap-3">

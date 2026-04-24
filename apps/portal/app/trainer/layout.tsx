@@ -29,9 +29,20 @@ export default async function TrainerLayout({ children }: { children: React.Reac
     .eq("user_id", user.id)
     .single();
 
+  // Fetch unread message count
+  const { count: unreadMessages } = await supabase
+    .from("notifications")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", user.id)
+    .eq("is_read", false);
+
   return (
     <div className="flex h-screen bg-cream overflow-hidden">
-      <TrainerSidebar trainer={trainer} userEmail={user.email ?? ""} />
+      <TrainerSidebar 
+        trainer={trainer} 
+        userEmail={user.email ?? ""} 
+        unreadCount={unreadMessages ?? 0}
+      />
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <TrainerTopBar trainer={trainer} />
         <main className="flex-1 overflow-y-auto">
